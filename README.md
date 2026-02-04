@@ -149,12 +149,17 @@ curl http://localhost:8000/v1/chat/completions \
 ## Commands
 
 ```
-make local-start    # Start proxy (background)
-make local-stop     # Stop proxy
+make local-start    # Start proxy locally (recommended)
+make local-stop     # Stop local proxy
 make local-status   # Check status
 make local-logs     # View logs
 make test           # Test the proxy
-make dev            # Development mode (foreground, hot reload)
+make dev            # Development mode (hot reload)
+
+# Docker (alternative)
+make start          # Start with Docker
+make stop           # Stop Docker container
+make logs           # View Docker logs
 ```
 
 ## Using with Open WebUI
@@ -175,9 +180,11 @@ claudette/
 │   ├── server.ts      # Express server, OpenAI-compatible endpoints
 │   ├── claude.ts      # Spawns Claude CLI, handles responses
 │   └── auth.ts        # Reads OAuth token from credentials
+├── Dockerfile         # Docker build configuration
+├── docker-compose.yml # Docker orchestration
+├── Makefile           # Build and run commands
 ├── package.json
 ├── tsconfig.json
-├── Makefile
 ├── .env               # Generated API key (gitignored)
 ├── OPENWEBUI.md       # Open WebUI setup guide
 └── README.md

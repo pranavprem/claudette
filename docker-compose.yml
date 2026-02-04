@@ -5,9 +5,20 @@ services:
     ports:
       - "127.0.0.1:8000:8000"
     volumes:
-      - ~/.claude:/root/.claude:ro
+      # Claude credentials (read-only)
+      - ~/.claude/.credentials.json:/root/.claude/.credentials.json:ro
+      - ~/.claude.json:/root/.claude.json:ro
+      # Writable dirs for CLI runtime (cache, debug logs, telemetry)
+      - claude-cache:/root/.claude/cache
+      - claude-debug:/root/.claude/debug
+      - claude-telemetry:/root/.claude/telemetry
     environment:
       - PORT=8000
     env_file:
       - .env
     restart: unless-stopped
+
+volumes:
+  claude-cache:
+  claude-debug:
+  claude-telemetry:

@@ -56,13 +56,16 @@ curl http://localhost:8000/v1/chat/completions \
 
 | Command | Description |
 |---------|-------------|
-| `make setup` | Build and start (first time) |
-| `make start` | Start the proxy |
-| `make stop` | Stop the proxy |
-| `make logs` | View container logs |
+| `make local-start` | Start proxy locally (recommended) |
+| `make local-stop` | Stop local proxy |
+| `make local-status` | Check if proxy is running |
+| `make local-logs` | View proxy logs |
 | `make test` | Test with a sample request |
+| `make dev` | Run locally with hot reload |
+| `make start` | Start with Docker |
+| `make stop` | Stop Docker container |
+| `make setup` | Docker: build and start |
 | `make clean` | Remove containers and credentials |
-| `make dev` | Run locally without Docker |
 
 ## Model Mappings
 
