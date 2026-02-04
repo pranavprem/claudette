@@ -1,0 +1,23 @@
+# Environment and credentials
+.env
+proxy.pid
+proxy.log
+
+# Node.js
+node_modules/
+dist/
+*.log
+npm-debug.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cloned repos
+claude-code-api/

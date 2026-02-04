@@ -1,0 +1,13 @@
+services:
+  proxy:
+    build: .
+    container_name: claude-proxy
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ~/.claude:/root/.claude:ro
+    environment:
+      - PORT=8000
+    env_file:
+      - .env
+    restart: unless-stopped
