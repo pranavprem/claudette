@@ -9,10 +9,10 @@ setup: .env build start
 	@echo ""
 	@echo "API Key: $$(grep API_KEY .env | cut -d= -f2)"
 	@echo ""
-	@echo "OpenAI-compatible endpoint: http://localhost:8000/v1"
+	@echo "OpenAI-compatible endpoint: http://localhost:5766/v1"
 	@echo ""
 	@echo "Test with:"
-	@echo '  curl http://localhost:8000/v1/chat/completions \'
+	@echo '  curl http://localhost:5766/v1/chat/completions \'
 	@echo '    -H "Authorization: Bearer $$(grep API_KEY .env | cut -d= -f2)" \'
 	@echo '    -H "Content-Type: application/json" \'
 	@echo "    -d '{\"model\":\"sonnet\",\"messages\":[{\"role\":\"user\",\"content\":\"Hi\"}]}'"
@@ -30,7 +30,7 @@ build:
 # Start the proxy
 start:
 	docker compose up -d
-	@echo "Proxy started at http://localhost:8000"
+	@echo "Proxy started at http://localhost:5766"
 
 # Stop the proxy
 stop:
@@ -51,10 +51,10 @@ clean:
 test:
 	@if [ ! -f .env ]; then echo "Run 'make setup' first"; exit 1; fi
 	@echo "Testing health..."
-	@curl -s http://localhost:8000/health | jq .
+	@curl -s http://localhost:5766/health | jq .
 	@echo ""
 	@echo "Testing chat completion..."
-	@curl -s http://localhost:8000/v1/chat/completions \
+	@curl -s http://localhost:5766/v1/chat/completions \
 		-H "Authorization: Bearer $$(grep API_KEY .env | cut -d= -f2)" \
 		-H "Content-Type: application/json" \
 		-d '{"model":"sonnet","messages":[{"role":"user","content":"Say hi in 5 words"}]}' | jq .
@@ -70,7 +70,7 @@ local-start: .env
 		echo "Proxy already running (PID $$(cat proxy.pid))"; \
 	else \
 		npm run build 2>/dev/null || npm install && npm run build; \
-		API_KEY=$$(grep API_KEY .env | cut -d= -f2) PORT=8000 \
+		API_KEY=$$(grep API_KEY .env | cut -d= -f2) PORT=5766 \
 			nohup node dist/server.js > proxy.log 2>&1 & \
 		echo $$! > proxy.pid; \
 		sleep 1; \
@@ -92,7 +92,7 @@ local-stop:
 local-status:
 	@if [ -f proxy.pid ] && kill -0 $$(cat proxy.pid) 2>/dev/null; then \
 		echo "Proxy running (PID $$(cat proxy.pid))"; \
-		curl -s http://localhost:8000/health | jq . 2>/dev/null || echo "But not responding on port 8000"; \
+		curl -s http://localhost:5766/health | jq . 2>/dev/null || echo "But not responding on port 5766"; \
 	else \
 		echo "Proxy not running"; \
 	fi

@@ -1,11 +1,11 @@
-# Claude Proxy
+# Claudette
 
 An OpenAI-compatible API proxy that lets you use Claude through your Claude Code (Max/Pro) subscription.
 
 ```
 ┌─────────────────┐         ┌─────────────────┐         ┌─────────────────┐
 │                 │   HTTP  │                 │  OAuth  │                 │
-│   Open WebUI    │────────▶│  Claude Proxy   │────────▶│   Anthropic     │
+│   Open WebUI    │────────▶│  Claudette   │────────▶│   Anthropic     │
 │   or any app    │◀────────│  (localhost)    │◀────────│   API           │
 │                 │   JSON  │                 │         │                 │
 └─────────────────┘         └─────────────────┘         └─────────────────┘
@@ -34,7 +34,7 @@ cd claudette
 make local-start
 
 # 3. Use with any OpenAI-compatible client
-curl http://localhost:8000/v1/chat/completions \
+curl http://localhost:5766/v1/chat/completions \
   -H "Authorization: Bearer $(grep API_KEY .env | cut -d= -f2)" \
   -H "Content-Type: application/json" \
   -d '{"model":"sonnet","messages":[{"role":"user","content":"Hello!"}]}'
@@ -98,7 +98,7 @@ curl http://localhost:8000/v1/chat/completions \
 ### Example Request
 
 ```bash
-curl http://localhost:8000/v1/chat/completions \
+curl http://localhost:5766/v1/chat/completions \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -169,7 +169,7 @@ See [OPENWEBUI.md](OPENWEBUI.md) for detailed setup instructions.
 Quick version:
 1. `make local-start`
 2. In Open WebUI: Settings → Connections → OpenAI API
-3. Set URL: `http://localhost:8000/v1` (or `http://host.docker.internal:8000/v1` if Open WebUI is in Docker)
+3. Set URL: `http://localhost:5766/v1` (or `http://host.docker.internal:5766/v1` if Open WebUI is in Docker)
 4. Set API Key: value from `.env` file
 
 ## Project Structure

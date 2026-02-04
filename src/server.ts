@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { ClaudeService } from './claude';
 import { getOAuthToken } from './auth';
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5766;
 const API_KEY = process.env.API_KEY || 'sk-local-proxy-key';
 
 const app = express();
@@ -181,7 +181,7 @@ app.use((req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Claude Proxy running on http://localhost:${PORT}`);
+  console.log(`Claudette running on http://localhost:${PORT}`);
   console.log(`OpenAI-compatible endpoint: http://localhost:${PORT}/v1`);
 
   const token = getOAuthToken();

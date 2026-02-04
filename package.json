@@ -1,5 +1,5 @@
 {
-  "name": "claude-proxy",
+  "name": "claudette",
   "version": "1.0.0",
   "description": "OpenAI-compatible proxy for Claude Code",
   "main": "dist/server.js",

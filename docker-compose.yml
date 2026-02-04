@@ -1,9 +1,9 @@
 services:
   proxy:
     build: .
-    container_name: claude-proxy
+    container_name: claudette
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:5766:5766"
     volumes:
       # Claude credentials (read-only)
       - ~/.claude/.credentials.json:/root/.claude/.credentials.json:ro
@@ -13,7 +13,7 @@ services:
       - claude-debug:/root/.claude/debug
       - claude-telemetry:/root/.claude/telemetry
     environment:
-      - PORT=8000
+      - PORT=5766
     env_file:
       - .env
     restart: unless-stopped

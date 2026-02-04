@@ -1,4 +1,4 @@
-# Setting up Open WebUI with Claude Proxy
+# Setting up Open WebUI with Claudette
 
 This guide shows how to connect Open WebUI to Claude using this local proxy.
 
@@ -15,11 +15,11 @@ cd /path/to/claudette
 make local-start
 ```
 
-This starts the proxy at `http://localhost:8000`.
+This starts the proxy at `http://localhost:5766`.
 
 Verify it's running:
 ```bash
-curl http://localhost:8000/health
+curl http://localhost:5766/health
 ```
 
 ## Step 2: Get Your API Key
@@ -48,8 +48,8 @@ Open http://localhost:3000 and create an account.
 1. Go to **Settings** (gear icon) → **Admin Settings** → **Connections**
 
 2. Under **OpenAI API**, configure:
-   - **API Base URL**: `http://host.docker.internal:8000/v1`
-     - If Open WebUI is running natively (not Docker): `http://localhost:8000/v1`
+   - **API Base URL**: `http://host.docker.internal:5766/v1`
+     - If Open WebUI is running natively (not Docker): `http://localhost:5766/v1`
    - **API Key**: Your key from `.env` (e.g., `sk-local-22c72fe427a6e001...`)
 
 3. Click **Save**
@@ -76,7 +76,7 @@ Open http://localhost:3000 and create an account.
 
 If Open WebUI runs in Docker, use `host.docker.internal` instead of `localhost`:
 ```
-http://host.docker.internal:8000/v1
+http://host.docker.internal:5766/v1
 ```
 
 On Linux, you may need to add `--add-host=host.docker.internal:host-gateway` to the Docker run command:

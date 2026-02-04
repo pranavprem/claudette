@@ -1,4 +1,4 @@
-# Claude Proxy
+# Claudette
 
 An OpenAI-compatible proxy that uses Claude Code's OAuth authentication.
 
@@ -30,7 +30,7 @@ from openai import OpenAI
 
 client = OpenAI(
     api_key="your-api-key-from-.env",
-    base_url="http://localhost:8000/v1"
+    base_url="http://localhost:5766/v1"
 )
 
 response = client.chat.completions.create(
@@ -46,7 +46,7 @@ for chunk in response:
 ### With curl
 
 ```bash
-curl http://localhost:8000/v1/chat/completions \
+curl http://localhost:5766/v1/chat/completions \
   -H "Authorization: Bearer $(grep API_KEY .env | cut -d= -f2)" \
   -H "Content-Type: application/json" \
   -d '{"model":"sonnet","messages":[{"role":"user","content":"Hello!"}]}'
@@ -81,7 +81,7 @@ curl http://localhost:8000/v1/chat/completions \
 ## Architecture
 
 ```
-[Your App] --API-key--> [Proxy :8000] --spawns--> [Claude CLI] --OAuth--> [Anthropic]
+[Your App] --API-key--> [Proxy :5766] --spawns--> [Claude CLI] --OAuth--> [Anthropic]
                               |
                     [~/.claude/.credentials.json] (read-only)
 ```
